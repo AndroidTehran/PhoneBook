@@ -2,11 +2,15 @@ package com.pouya11.phonebook.models;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.pouya11.phonebook.DatabaseHelper;
 
+import java.util.ArrayList;
+
 /**
+ * this is a model class will contain phone records
  * Created by Mohammad on 01/12/2016.
  */
 public class PhoneRecord {
@@ -79,10 +83,34 @@ public class PhoneRecord {
 
         this.setId(db.insert(PhoneRecord.TABLE,null, contentValues));
 
-        if (this.getId() > 0)
-            return true;
-        else
-            return false;
+        return this.getId() > 0;
+    }
+
+    public static ArrayList<PhoneRecord> select(Context context, String selection, String orderBy, String limit){
+        DatabaseHelper dbh = new DatabaseHelper(context);
+
+        SQLiteDatabase db = dbh.getWritableDatabase();
+
+        Cursor cursor = db.query(PhoneRecord.TABLE,null,selection, null, null, null, orderBy, limit);
+
+        ArrayList<PhoneRecord> result = new ArrayList<>();
+
+        if(cursor.moveToFirst()) {
+            do {
+                PhoneRecord phoneRecord = new PhoneRecord();
+                phoneRecord.setId( cursor.getLong( cursor.getColumnIndex(PhoneRecord.ID) ) );
+                phoneRecord.setName( cursor.getString( cursor.getColumnIndex(PhoneRecord.NAME) ) );
+                phoneRecord.setFamily( cursor.getString( cursor.getColumnIndex(PhoneRecord.FAMILY) ) );
+                phoneRecord.setPhone( cursor.getString( cursor.getColumnIndex(PhoneRecord.PHONE) ) );
+                phoneRecord.setEmail( cursor.getString( cursor.getColumnIndex(PhoneRecord.EMAIL) ) );
+
+                result.add(phoneRecord);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return result;
     }
 
     public static final String TABLE = "phonebook";

@@ -25,13 +25,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        ArrayList<PhoneRecord> dummy_list = new ArrayList<>();
-        dummy_list.add(new PhoneRecord("Ali", "Valizade", "09129994444", "email@domain.com"));
-        dummy_list.add(new PhoneRecord("Sara", "Valizade", "09129994442", "email2@domain.com"));
-        dummy_list.add(new PhoneRecord("Joe", "Japani", "001-888-8761342", "email@dsaweq.us"));
-        dummy_list.add(new PhoneRecord("Jack", "Sparrow", "---", "---"));
-
-        PhoneRecordAdapter phoneRecordAdapter = new PhoneRecordAdapter(this, dummy_list);
+        PhoneRecordAdapter phoneRecordAdapter =
+                new PhoneRecordAdapter(this, PhoneRecord.select(this,null,null,null));
         lvPhoneRecord.setAdapter(phoneRecordAdapter);
     }
 
