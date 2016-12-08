@@ -44,6 +44,9 @@ public class CreateRecordActivity extends AppCompatActivity {
             finish();
         }else{
             Toast.makeText(this, "Oops!! something went wrong", Toast.LENGTH_LONG).show();
+
+            Vibrator v = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+            v.vibrate(500);
         }
     }
 }
