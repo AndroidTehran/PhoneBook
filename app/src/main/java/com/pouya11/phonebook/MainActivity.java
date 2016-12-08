@@ -18,7 +18,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lvPhoneRecord = (ListView) findViewById(R.id.listView);
+        lvPhoneRecord = (ListView) findViewById(R.id.lst_main);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         ArrayList<PhoneRecord> dummy_list = new ArrayList<>();
         dummy_list.add(new PhoneRecord("Ali", "Valizade", "09129994444", "email@domain.com"));
@@ -32,5 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnChangePasswordClicked(View view) {
         startActivity(new Intent(this, ChangePasswordActivity.class));
+    }
+
+    public void btnCreateNewRecordClicked(View view) {
+        startActivity(new Intent(this, CreateRecordActivity.class));
     }
 }

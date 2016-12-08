@@ -8,4 +8,10 @@
     <string name="confirm_new_password">Confirm new password</string>
     <string name="change">Change</string>
     <string name="cancel">Cancel</string>
+    <string name="new_record">Create new record</string>
+    <string name="name">Name</string>
+    <string name="email">E-mail</string>
+    <string name="phone">Phone</string>
+    <string name="family">Family</string>
+    <string name="save">Save</string>
 </resources>
